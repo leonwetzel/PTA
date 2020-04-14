@@ -9,14 +9,27 @@ def main():
 
     :return:
     """
-    with open("holmes.txt") as file:
-        data = file.read()
+    with open("holmes.txt", "rt") as file:
+        data = file.readlines()
 
-    print(data)
+    sentences, ngrams = prepare(data)
 
 
 def prepare(data):
-    pass
+    """
+    Cleans the data and generates sentences and n-grams.
+    :param data:
+    :return: list of sentences and list of ngrams.
+    """
+    sentences, ngrams = [], []
+
+    sentences = [sentence.strip() for sentence in data]
+    sentences = list(filter(None, sentences))
+    sentences = " ".join(sentences)
+
+    print(sentences)
+
+    return sentences, ngrams
 
 
 def longest_sentence(sentences):
