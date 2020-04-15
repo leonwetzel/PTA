@@ -12,32 +12,45 @@ def main():
     with open("holmes.txt", "rt") as file:
         data = file.readlines()
 
-    sentences, ngrams = prepare(data)
+    sentences = prepare(data)
+    lengths = {sentence: len(sentence) for sentence in sentences}
+
+    print("Performing 1A: Longest sentence...")
+    print(longest_sentence(lengths))
+
+    print("Performing 1B: Shortest sentence...")
+    print(shortest_sentence(lengths))
 
 
 def prepare(data):
     """
-    Cleans the data and generates sentences and n-grams.
+    Restructures the data and generates sentences.
     :param data:
     :return: list of sentences and list of ngrams.
     """
-    sentences, ngrams = [], []
-
     sentences = [sentence.strip() for sentence in data]
     sentences = list(filter(None, sentences))
     sentences = " ".join(sentences)
-
-    print(sentences)
-
-    return sentences, ngrams
+    sentences = nltk.sent_tokenize(sentences)
+    return sentences
 
 
-def longest_sentence(sentences):
-    pass
+def longest_sentence(lengths):
+    """
+    Returns the longest sentence in the corpus.
+    :param sentences:
+    :return:
+    """
+    return sorted(lengths, key=lengths.get, reverse=True)[0]
 
 
-def shortest_sentence(sentences):
-    pass
+def shortest_sentence(lengths):
+    """
+    Returns the shortest sentence in the corpus.
+    :param sentences:
+    :return:
+    """
+    return sorted(lengths, key=lengths.get, reverse=True)[-1]
 
 
 def sentence_length_distribution(sentences):
