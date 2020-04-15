@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import operator
 import nltk
 
 
@@ -13,13 +14,19 @@ def main():
         data = file.readlines()
 
     sentences = prepare(data)
-    lengths = {sentence: len(sentence) for sentence in sentences}
+    sorted_lengths = sorted([(len(sentence), sentence) for sentence in sentences])
 
     print("Performing 1A: Longest sentence...")
-    print(longest_sentence(lengths))
+    print(longest_sentence(sorted_lengths), '\n')
 
     print("Performing 1B: Shortest sentence...")
-    print(shortest_sentence(lengths))
+    print(shortest_sentence(sorted_lengths), '\n')
+
+    print("Performing 1C: Distribution of sentence lengths...")
+    print("asdsada")
+
+    print("Performing 1D: Average sentence length...")
+    print()
 
 
 def prepare(data):
@@ -41,7 +48,7 @@ def longest_sentence(lengths):
     :param sentences:
     :return:
     """
-    return sorted(lengths, key=lengths.get, reverse=True)[0]
+    return lengths[-1][1]
 
 
 def shortest_sentence(lengths):
@@ -50,7 +57,7 @@ def shortest_sentence(lengths):
     :param sentences:
     :return:
     """
-    return sorted(lengths, key=lengths.get, reverse=True)[-1]
+    return lengths[0][1]
 
 
 def sentence_length_distribution(sentences):
