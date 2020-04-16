@@ -14,7 +14,13 @@ def main():
         data = file.readlines()
 
     sentences = prepare(data)
+
+    for sentence in sentences:
+        print(sentence)
+
     sorted_lengths = sorted([(len(sentence), sentence) for sentence in sentences])
+
+    print(sorted_lengths)
 
     print("Performing 1A: Longest sentence...")
     print(longest_sentence(sorted_lengths), '\n')
@@ -23,7 +29,7 @@ def main():
     print(shortest_sentence(sorted_lengths), '\n')
 
     print("Performing 1C: Distribution of sentence lengths...")
-    print("asdsada")
+    print("asdsada", '\n')
 
     print("Performing 1D: Average sentence length...")
     print()
