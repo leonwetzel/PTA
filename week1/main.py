@@ -8,20 +8,29 @@ __email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buisje@student.rug.nl",
              "r.p.terpstra@student.rug.nl"]
 __status__ = "Development"
 
+from collections import Counter, OrderedDict
 import nltk
+
+LENGTH, SENTENCE = 0, 1
+counter = Counter()
 
 
 def main():
     """
     Script for assignment 1 of week 1 for the course Project Text Analysis.
     This script processes holmes.txt and retrieves information such as
+    amount of sentences, length of sentences and n-grams.
     :return:
     """
+    print("Reading file...")
     with open("holmes.txt", "rt") as file:
         data = file.readlines()
+    print("Done!", '\n')
 
+    print("Preparing data...")
     sentences = prepare(data)
     sorted_lengths = sorted([(len(sentence), sentence) for sentence in sentences])
+    print("Done!", '\n')
 
     print("Performing 1A: Longest sentence, semi-based on alphabetical order...")
     print(longest_sentence(sorted_lengths), '\n')
@@ -30,10 +39,13 @@ def main():
     print(shortest_sentence(sorted_lengths), '\n')
 
     print("Performing 1C: Distribution of sentence lengths...")
-    print("asdsada", '\n')
-
-    print("Performing 1D: Average sentence length...")
+    distribution = sentence_length_distribution(sorted_lengths)
+    for length, frequency in distribution.items():
+        print("Length = {}, count = {}".format(length, frequency))
     print()
+
+    print("Performing 1D: Average sentence length in amount of characters...")
+    print(average_sentence_length(sorted_lengths), '\n')
 
     print("Performing 2A: Amount of character types...")
     print()
@@ -65,27 +77,40 @@ def prepare(data):
 def longest_sentence(lengths):
     """
     Returns the longest sentence in the corpus.
+    Length is based on the amount of characters
+    in a sentence.
     :param lengths:
     :return:
     """
-    return lengths[-1][1]
+    return lengths[-1][SENTENCE]
 
 
 def shortest_sentence(lengths):
     """
     Returns the shortest sentence in the corpus.
+    Length is based on the amount of characters
+    in a sentence.
     :param lengths:
     :return:
     """
-    return lengths[0][1]
+    return lengths[0][SENTENCE]
 
 
 def sentence_length_distribution(sentences):
-    pass
+    for sentence in sentences:
+        counter[sentence[LENGTH]] += 1
+    return OrderedDict(counter)
 
 
 def average_sentence_length(sentences):
-    pass
+    """
+    Returns the average sentence length,
+    based on the amount of characters in sentences.
+    :param sentences:
+    :return:
+    """
+    lengths = [sentence[LENGTH] for sentence in sentences]
+    return sum(lengths) / len(lengths)
 
 
 def character_types(ngrams):
