@@ -4,10 +4,11 @@ __copyright__ = "Copyright 2020 - Leon Wetzel, Teun Buijse and Roman Terpstra"
 __credits__ = ["Leon Wetzel", "Teun Buijse", "Roman Terpstra"]
 __license__ = "GPL"
 __version__ = "0.1"
-__email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buisje@student.rug.nl",
+__email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buijse@student.rug.nl",
              "r.p.terpstra@student.rug.nl"]
 __status__ = "Development"
 
+import string
 from collections import Counter, OrderedDict
 import nltk
 
@@ -28,7 +29,8 @@ def main():
     print("Done!", '\n')
 
     print("Preparing data...")
-    sentences = prepare(data)
+    corpus = generate_corpus(data)
+    sentences = prepare(corpus)
     sorted_lengths = sorted([(len(sentence), sentence) for sentence in sentences])
     print("Done!", '\n')
 
@@ -47,10 +49,16 @@ def main():
     print("Performing 1D: Average sentence length in amount of characters...")
     print(average_sentence_length(sorted_lengths), '\n')
 
+    print("Generating ngrams and removing punctuation...")
+    unigrams, bigrams, trigrams  = generate_ngrams(corpus)
+    print("Done!", '\n')
+
     print("Performing 2A: Amount of character types...")
+    character_types(unigrams)
     print()
 
     print("Performing 2B: Amount of word types...")
+    word_types(unigrams)
     print()
 
     print("Performing 2C: Top 20 character-level unigrams, bigrams and trigrams...")
@@ -60,18 +68,43 @@ def main():
     print()
 
 
-def prepare(data):
+def generate_corpus(data):
+    """
+    Turns the source data into
+    :param data:
+    :return:
+    """
+    corpus = [sentence.strip() for sentence in data]
+    corpus = list(filter(None, corpus))
+    corpus = " ".join(corpus)
+    return corpus
+
+
+def prepare(corpus):
     """
     Restructures the data and generates sentences.
     Sentence tokenization is performed by NLTK's sent_tokenize().
-    :param data:
+    :param corpus:
     :return: list of sentences and list of ngrams.
     """
-    sentences = [sentence.strip() for sentence in data]
-    sentences = list(filter(None, sentences))
-    sentences = " ".join(sentences)
-    sentences = nltk.sent_tokenize(sentences)
+    sentences = nltk.sent_tokenize(corpus)
     return sentences
+
+
+def generate_ngrams(corpus):
+    """
+    Generates n-grams. Bigrams and trigrams are based on unigrams.
+    :param corpus:
+    :return:
+    """
+    unigrams = [
+        token.translate(str.maketrans('', '', string.punctuation))
+        for token in nltk.word_tokenize(corpus)
+    ]
+    unigrams = [token for token in unigrams if token]
+    bigrams = nltk.bigrams(unigrams)
+    trigrams = nltk.trigrams(unigrams)
+    return unigrams, bigrams, trigrams
 
 
 def longest_sentence(lengths):
@@ -97,6 +130,12 @@ def shortest_sentence(lengths):
 
 
 def sentence_length_distribution(sentences):
+    """
+    Returns a dictionary containing lengths
+    and frequencies of lengths of sentences.
+    :param sentences:
+    :return:
+    """
     for sentence in sentences:
         counter[sentence[LENGTH]] += 1
     return OrderedDict(counter)
@@ -113,12 +152,28 @@ def average_sentence_length(sentences):
     return sum(lengths) / len(lengths)
 
 
-def character_types(ngrams):
-    pass
+def character_types(unigrams):
+    """
+    Extracts character types from a given list of unigrams.
+    :param unigrams:
+    :return:
+    """
+    types = set(unigrams)
+    print("Amount of character types: {}".format(len(types)))
+    for character_type in sorted(types):
+        print(character_type)
 
 
-def word_types(ngrams):
-    pass
+def word_types(unigrams):
+    """
+    Extracts word types from a given list of unigrams.
+    :param unigrams:
+    :return:
+    """
+    types = set([token.lower() for token in unigrams])
+    print("Amount of word types: {}".format(len(types)))
+    for word_type in sorted(types):
+        print(word_type)
 
 
 def top_twenty_character_level_unigrams_bigrams_trigrams(ngrams):
