@@ -11,6 +11,7 @@ __status__ = "Development"
 import string
 from collections import Counter, OrderedDict
 import nltk
+from nltk import ngrams
 
 LENGTH, SENTENCE = 0, 1
 counter = Counter()
@@ -62,9 +63,11 @@ def main():
     print()
 
     print("Performing 2C: Top 20 character-level unigrams, bigrams and trigrams...")
+    top_twenty_character_level_unigrams_bigrams_trigrams(unigrams)
     print()
 
     print("Performing 2D: Top 20 word-level unigrams, bigrams and trigrams...")
+    top_twenty_word_level_unigrams_bigrams_trigrams(unigrams)
     print()
 
 
@@ -176,12 +179,59 @@ def word_types(unigrams):
         print(word_type)
 
 
-def top_twenty_character_level_unigrams_bigrams_trigrams(ngrams):
-    pass
+def top_twenty_character_level_unigrams_bigrams_trigrams(unigrams):
+    print('Generating most frequent character level unigrams...')
+    character_level_unigrams = []
+    for token in unigrams:
+        for letter in token:
+            character_level_unigrams.append(letter.lower())
+    unigram_dict = Counter(character_level_unigrams)
+    for unigram in sorted(unigram_dict, key=unigram_dict.get, reverse = True)[:20]:
+        print(unigram)
+    print()
+    
+    print('Generating most frequent character level bigrams...')
+    character_level_bigrams = []
+    for token in unigrams:
+        for letter_index in range(len(token) - 1):
+            character_level_bigrams.append(token[letter_index].lower() + token[letter_index + 1].lower())
+    bigram_dict = Counter(character_level_bigrams)
+    for bigram in sorted(bigram_dict, key=bigram_dict.get, reverse = True)[:20]:
+        print(bigram)
+    print()
+    
+    print('Generating most frequent character level trigrams...')
+    character_level_trigrams = []
+    for token in unigrams:
+        for letter_index in range(len(token) - 2):
+            character_level_trigrams.append(token[letter_index].lower() + token[letter_index + 1].lower() + token[letter_index + 2])
+    trigram_dict = Counter(character_level_trigrams)
+    for trigram in sorted(trigram_dict, key=trigram_dict.get, reverse = True)[:20]:
+        print(trigram)
+    print()
+			
+
+			
 
 
-def top_twenty_word_level_unigrams_bigrams_trigrams(ngrams):
-    pass
+def top_twenty_word_level_unigrams_bigrams_trigrams(unigrams):
+    print('Generating most frequent character level unigrams...')
+    unigram_dict = Counter(ngrams(unigrams, 1))
+    for unigram in sorted(unigram_dict, key=unigram_dict.get, reverse = True)[:20]:
+        print(*unigram)
+    print()
+    
+    print('Generating most frequent character level bigrams...')
+    bigram_dict = Counter(ngrams(unigrams, 2))
+    for bigram in sorted(bigram_dict, key=bigram_dict.get, reverse = True)[:20]:
+        print(*bigram)
+    print()
+    
+    print('Generating most frequent character level trigrams...')
+    trigram_dict = Counter(ngrams(unigrams, 3))
+    for trigram in sorted(trigram_dict, key=trigram_dict.get, reverse = True)[:20]:
+        print(*trigram)
+    print()
 
 
 if __name__ == '__main__':
