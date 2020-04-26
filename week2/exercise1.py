@@ -9,7 +9,39 @@ __email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buijse@student.rug.nl",
 __status__ = "Development"
 
 
+import nltk
+from nltk import wordpunct_tokenize
+from nltk.collocations import BigramCollocationFinder
+
+
 def main():
+    with open('holmes.txt') as file:
+        text = file.read()
+
+    tokens = wordpunct_tokenize(text)
+    print(tokens)
+    bigram_measures = nltk.collocations.BigramAssocMeasures()
+    finder = BigramCollocationFinder.from_words(tokens)
+    scored = finder.score_ngrams(bigram_measures.raw_freq())
+
+    sorted_values = sorted([bigram for bigram, score in scored])
+
+    print(sorted_values)
+
+
+def most_likely_20_collocations_by_pmi(collocations):
+    pass
+
+
+def most_likely_20_collocations_by_chi_square(collocations):
+    pass
+
+
+def compare_top_20_bigrams():
+    pass
+
+
+def calculate_spearman_coefficient():
     pass
 
 
