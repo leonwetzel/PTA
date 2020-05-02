@@ -8,6 +8,8 @@ __email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buijse@student.rug.nl",
              "r.p.terpstra@student.rug.nl"]
 __status__ = "Development"
 
+from collections import Counter
+
 import nltk
 
 br_tw = nltk.corpus.brown.tagged_words(categories='mystery')
@@ -33,7 +35,46 @@ def main():
     print()
 
     print("2C. Amount of different POS tags...")
+    unique_tags = set([pair[TAG] for pair in br_tw])
+    print("{} different POS tags".format(len(unique_tags)))
+    print()
 
+    print("2D. Top 15 words...")
+    words = [pair[WORD] for pair in br_tw]
+    for word, count in Counter(words).most_common(15):
+        print(count, word)
+    print()
+
+    print("2E. Top 15 POS tags...")
+    tags = [pair[TAG] for pair in br_tw]
+    for tag, count in Counter(tags).most_common(15):
+        print(count, tag)
+    print()
+
+    print("2F. Most frequent POS tag in the 20th and the 40th sentence...")
+    print(most_frequent_tag_in_sentence(br_ts[19]))
+    print(most_frequent_tag_in_sentence(br_ts[39]))
+    print("Note: both sentences only contain unique tags"
+          " and therefore every tag has a frequency of 1.")
+    print()
+
+    print("2G. Most frequent adverb...")
+    print()
+
+    print("2H. Most frequent adjective...")
+    print()
+
+    print("2I. POS tags for 'so'...")
+    print()
+
+    print("2J. Most frequent POS tag for 'so'...")
+    print()
+
+    print("2K. Example sentences for 'so'...")
+    print()
+
+    print("2L. Most likely POS tags preceding and following 'so'...")
+    print()
 
 
 def amount_of_words_and_sentences():
@@ -42,6 +83,17 @@ def amount_of_words_and_sentences():
     :return:
     """
     return len(br_tw), len(br_ts)
+
+
+def most_frequent_tag_in_sentence(sentence):
+    """
+    Returns the most frequent POS tag found in a given sentence.
+    If
+    :param sentence:
+    :return:
+    """
+    tags = [pair[TAG] for pair in sentence]
+    return Counter(tags).most_common(1)
 
 
 if __name__ == '__main__':
