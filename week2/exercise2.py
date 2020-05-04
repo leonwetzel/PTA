@@ -139,6 +139,11 @@ def main():
     of holmes.txt.
     """
 
+    with open ('holmes.txt', 'r') as file:
+        holmes = file.read()
+        holmes = nltk.word_tokenize(holmes)
+        pos_tagged = nltk.pos_tag(holmes)
+
     print("==============================================")
     print("ASSIGNMENT 2 - PART 4")
     print("==============================================\n")
@@ -152,6 +157,19 @@ def main():
     • what could they be used for?
     """
 
+    pos_tag_list = []
+    for word in br_tw:
+        pos_tag_list.append(word[1])
+    text = nltk.Text(pos_tag_list)
+
+    bigram_ass_measures = nltk.collocations.BigramAssocMeasures()
+    pos_collocations = BigramCollocationFinder.from_words(pos_tag_list)
+
+    top_five = pos_collocations.nbest(bigram_ass_measures.pmi, 5)
+    print(top_five)
+
+    top_five_raw = pos.collocations.ngram_fd.most_common(5)
+    print(top_five_raw)
 
 def amount_of_words_and_sentences():
     """
