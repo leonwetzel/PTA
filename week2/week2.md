@@ -113,11 +113,12 @@ Process finished with exit code 0
 
 ```
 ### 2.4
+```
 Top 5 significant:
 [('FW-AT-TL', 'FW-NNS-TL'), ('FW-NNS-TL', 'FW-JJ-TL'), ('FW-PPL', 'FW-VB'), ('FW-VB', 'FW-NP'), ('FW-VBZ, 'FW-RB')]
 Top 5 raw:
 [(('AT', 'NN'), 2692), (('IN', 'AT'), 1901), (('NN', 'IN'), 1379), (('NN', '.'), 1205), (('JJ', 'NN'), 876)]
-
+```
 - Yes they look interesting, they're all foreign words which you would not expect.
 - Yes they are quite different.
 - This could for example be used in automatic text recognition. Foreign words are used more often in certain types of text,
