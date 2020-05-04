@@ -15,34 +15,40 @@ from nltk.collocations import BigramCollocationFinder
 
 
 def main():
+    """
+    Prepares the txt file and turns it into tokens.
+    """
     with open('holmes.txt') as file:
         text = file.read()
-
     tokens = wordpunct_tokenize(text)
-    print(tokens)
+    most_likely_20_collocations_by_pmi(tokens)
+    most_likely_20_collocations_by_chi_sq(tokens)
+
+
+def most_likely_20_collocations_by_pmi(tokens):
+    """
+    Generates the 20 most likely collocations.
+    """
+    print('Generating 20 most likely collocations using PMI...')
     bigram_measures = nltk.collocations.BigramAssocMeasures()
     finder = BigramCollocationFinder.from_words(tokens)
-    scored = finder.score_ngrams(bigram_measures.raw_freq())
-
-    sorted_values = sorted([bigram for bigram, score in scored])
-
-    print(sorted_values)
-
-
-def most_likely_20_collocations_by_pmi(collocations):
-    pass
+    scored_pmi = finder.score_ngrams(bigram_measures.pmi)
+    for i in scored_pmi[:20]:
+        print(*i)
+    print()
 
 
-def most_likely_20_collocations_by_chi_square(collocations):
-    pass
-
-
-def compare_top_20_bigrams():
-    pass
-
-
-def calculate_spearman_coefficient():
-    pass
+def most_likely_20_collocations_by_chi_sq(tokens):
+    """
+    Generates the 20 most likely collocations.
+    """
+    print('Generating 20 most likely collocations using chi squared...')
+    bigram_measures = nltk.collocations.BigramAssocMeasures()
+    finder = BigramCollocationFinder.from_words(tokens)
+    scored_chi_sq = finder.score_ngrams(bigram_measures.chi_sq)
+    for i in scored_chi_sq[:20]:
+        print(*i)
+    print()
 
 
 if __name__ == '__main__':
