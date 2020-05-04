@@ -1,0 +1,6 @@
+1.1c. The ranking is different because all the top bigrams have the same score this is because their occurences together are the same. The chi square test eliminates more options because it takes into account how far observed values are from expected values, bacause of this the chi square tends to measure independance better than dependence and doenst the test account for how often the words do not appear together.
+
+
+1.2. When the range of both the rows and the columns in the table is the same. For example when having  2 rows and 2 columns in a 2x2 table in the case of bigrams when filling in the formula the rewritten formula can be found.
+
+
