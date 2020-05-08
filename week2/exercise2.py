@@ -163,13 +163,14 @@ def main():
         pos_tag_list.append(word[1])
 
     bigram_assoc_measures = nltk.collocations.BigramAssocMeasures()
-    pos_collocations = BigramCollocationFinder.from_words(pos_tag_list)
+    pos_collocations = nltk.BigramCollocationFinder.from_words(pos_tag_list)
 
     top_five = pos_collocations.nbest(bigram_assoc_measures.pmi, 5)
     print(top_five)
 
-    top_five_raw = pos.collocations.ngram_fd.most_common(5)
+    top_five_raw = pos_collocations.ngram_fd.most_common(5)
     print(top_five_raw)
+
 
 def amount_of_words_and_sentences():
     """
