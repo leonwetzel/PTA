@@ -9,7 +9,11 @@ __email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buijse@student.rug.nl",
 __status__ = "Development"
 
 
-import nltk
+from nltk import word_tokenize, pos_tag
+from nltk.corpus import wordnet
+from nltk.stem.wordnet import WordNetLemmatizer
+
+lemmatizer = WordNetLemmatizer()
 
 
 def main():
@@ -18,6 +22,18 @@ def main():
     """
     print("ASSIGNMENT 3 - PART 1")
     print("==============================================\n")
+
+    with open("ada_lovelace.txt", 'r') as file:
+        corpus = file.read()
+
+    tokens = word_tokenize(corpus)
+    pos_tags = pos_tag(tokens)
+
+    noun_lemmas = []
+    for item in pos_tags:
+        if item[1][0] == 'N':
+            lemma = lemmatizer.lemmatize(item[0], wordnet.NOUN)
+            noun_lemmas.append(lemma)
 
 
 def amount_of_nouns_referring_to_relative():
