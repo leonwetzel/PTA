@@ -104,7 +104,7 @@ def score_similarity():
                         ('monk-slave', monk.path_similarity(slave)), ('moon-string', moon.path_similarity(string))]
 
     synset_list_lch = [('car-automobile', car.lch_similarity(automobile)), ('coast-shore', coast.lch_similarity(shore)),
-                       ('food-fruit', food.lch_similarity(fruit)), ('journey-car', joKurney.lch_similarity(car)),
+                       ('food-fruit', food.lch_similarity(fruit)), ('journey-car', journey.lch_similarity(car)),
                        ('monk-slave', monk.lch_similarity(slave)), ('moon-string', moon.lch_similarity(string))]
 
     print('Path Similarity\n')
