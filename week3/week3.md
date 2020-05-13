@@ -8,8 +8,33 @@ Project Text Analysis
 
 ## Exercise 1
 
-sadsajdksajdksajdsadksadsad
+### Part 3
 
+ ```python
+
+Path Similarity
+
+('car-automobile', 1.0)
+('coast-shore', 0.5)
+('monk-slave', 0.2)
+('moon-string', 0.1111111111111111)
+('food-fruit', 0.09090909090909091)
+('journey-car', 0.05)
+
+Leacock-Chodorow Similarity
+
+('car-automobile', 3.6375861597263857)
+('coast-shore', 2.9444389791664407)
+('monk-slave', 2.0281482472922856)
+('moon-string', 1.4403615823901665)
+('food-fruit', 1.2396908869280152)
+('journey-car', 0.6418538861723948)
+
+Process finished with exit code 0
+````
+As you can see the ranking is quite different, mostly when it comes to medium-level similarity pairs.
+The similarity measures in the NLTK corpus reader do not consider these to be very similar, while the subjects did, in our eyes, succesfully recognize that these are more similar than monk-slave for example.
+This could be explained by the fact that car-automobile, for example, can be used interchangeably. While food-fruit have very different meaning but belong to the same category.
 ## Exercise 2
 
 ### Part 1
