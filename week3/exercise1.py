@@ -36,44 +36,68 @@ def main():
 
     score_similarity()
 
+    amount_of_nouns_referring_to_relative()
+    amount_of_nouns_referring_to_illness()
+    amount_of_nouns_referring_to_science()
 
-def amount_of_nouns_referring_to_relative(relative_lemma):
-    pass
+
+def amount_of_nouns_referring_to_relative():
+    relative_lemma = lemmatizer.lemmatize('relative')
+    synsets = wordnet.synsets(relative_lemma)
+    print('The amount of nouns referring to the word relative is: {}'.format(len(synsets)))
+    print()
 
 
-def amount_of_nouns_referring_to_illness(illness_lemma):
-    pass
+def amount_of_nouns_referring_to_illness():
+    illness_lemma = lemmatizer.lemmatize('illness')
+    synsets = wordnet.synsets(illness_lemma)
+    print('The amount of nouns referring to the word illness is: {}'.format(len(synsets)))
+    print()
 
 
 def amount_of_nouns_referring_to_science():
-    pass
+    science_lemma = lemmatizer.lemmatize('science')
+    synsets = wordnet.synsets(science_lemma)
+    print('The amount of nouns referring to the word science is: {}'.format(len(synsets)))
+    print()
 
 
-def amount_of_hypernyms_per_noun():
+def amount_of_hypernyms_per_noun(noun_lemmas):
     """
-    In how many cases was there only one hypernym per noun? Give a couple of
-    examples, indicating the noun and its hypernym
+    1. In how many cases was there only one hypernym per noun? Give a couple of
+    examples, indicating the noun and its hypernym.
+    2. In how many cases did your system had to choose among more than one
+    possi-ble hypernyms?  Give a couple of examples, and specify which
+    hypernyms wereavailable.
+    3. What is the average number of hypernyms per noun in the whole text?
     :return:
     """
-    pass
-
-
-def amount_of_chosen_possible_hypernyms():
-    """
-    In how many cases did your system had to choose among more than one possible
-    hypernyms? Give a couple of examples, and specify which hypernyms were
-    available
-    :return:
-    """
-    pass
-
-
-def average_number_of_hypernyms_per_noun():
-    """
-    What is the average number of hypernyms per noun in the whole text?
-    :return:
-    """
-    pass
+    one_hypernym_list = []
+    more_hypernyms_list = []
+    for noun in noun_lemmas[:-1]:
+        synsets = wordnet.synsets(noun, pos='n')
+        hypernym_list = []
+        for synset in synsets:
+            hypernym = synset.hypernyms()
+            if hypernym and hypernym not in hypernym_list:
+                hypernym_list.append(hypernym)
+        if len(hypernym_list) == 1:
+            one_hypernym_list.append([noun, hypernym_list])
+        if len(hypernym_list) > 1:
+            more_hypernyms_list.append([noun, hypernym_list])
+    print('Printing nouns with one hypernym and corresponing hypernym')
+    print(one_hypernym_list)
+    print()
+    print('Printing nouns with more than one hypernyms and corresponing hypernyms')
+    print(more_hypernyms_list)
+    print()
+    hypernyms = len(one_hypernym_list)
+    for more_hypernym_noun in more_hypernyms_list:
+        hypernyms += len(more_hypernym_noun[1])
+    average_hypernyms = hypernyms / len(noun_lemmas)
+    print('The average hypernyms per word in the text is:')
+    print(average_hypernyms)
+    print()
 
 
 def score_similarity():
