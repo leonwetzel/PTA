@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>week3</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="comments-and-answers---assignment-3">Comments and answers - Assignment 3</h1>
+<p>Project Text Analysis</p>
+<p><em>Leon Wetzel, Teun Buijse and Roman Terpstra</em></p>
+<hr />
+<h2 id="exercise-1">Exercise 1</h2>
+<h3 id="part-3">Part 3</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2"></a>Path Similarity</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>(<span class="st">&#39;car-automobile&#39;</span>, <span class="fl">1.0</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>(<span class="st">&#39;coast-shore&#39;</span>, <span class="fl">0.5</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>(<span class="st">&#39;monk-slave&#39;</span>, <span class="fl">0.2</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>(<span class="st">&#39;moon-string&#39;</span>, <span class="fl">0.1111111111111111</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>(<span class="st">&#39;food-fruit&#39;</span>, <span class="fl">0.09090909090909091</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>(<span class="st">&#39;journey-car&#39;</span>, <span class="fl">0.05</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>Leacock<span class="op">-</span>Chodorow Similarity</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>(<span class="st">&#39;car-automobile&#39;</span>, <span class="fl">3.6375861597263857</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a>(<span class="st">&#39;coast-shore&#39;</span>, <span class="fl">2.9444389791664407</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>(<span class="st">&#39;monk-slave&#39;</span>, <span class="fl">2.0281482472922856</span>)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>(<span class="st">&#39;moon-string&#39;</span>, <span class="fl">1.4403615823901665</span>)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>(<span class="st">&#39;food-fruit&#39;</span>, <span class="fl">1.2396908869280152</span>)</span>
+<span id="cb1-18"><a href="#cb1-18"></a>(<span class="st">&#39;journey-car&#39;</span>, <span class="fl">0.6418538861723948</span>)</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>Process finished <span class="cf">with</span> exit code <span class="dv">0</span></span></code></pre></div>
+<p>As you can see the ranking is quite different, mostly when it comes to medium-level similarity pairs. The similarity measures in the NLTK corpus reader do not consider these to be very similar, while the subjects did, in our eyes, succesfully recognize that these are more similar than monk-slave for example. This could be explained by the fact that car-automobile, for example, can be used interchangeably. While food-fruit have very different meaning but belong to the same category. ## Exercise 2</p>
+<h3 id="part-1">Part 1</h3>
+<p>To start the server, we use the following bash command:</p>
+<p><code>shell script $ java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer  -port 9000 -timeout 15000 -serverProperties server.properties</code></p>
+<p>We count 2 ORGANIZATION’s, 1 LOCATION and 20 PERSON’s. Not all the shown named entities are correct. For example, <em>Augusta Ada King</em> and <em>Ada</em> are named as ORGANIZATION, which is not correct in this particular context.</p>
+<p>### Part 2</p>
+<p>There appear to be 6 other models for named entities. We take a closer look at the 4 and 7 classes type of models.</p>
+<ul>
+<li><code>english.conll.4class.distsim.prop</code></li>
+<li><code>regexner.patterns</code></li>
+<li><code>english.muc.7class.distsim.crf.ser.gz</code></li>
+<li><code>english.conll.4class.distsim.crf.ser.gz</code></li>
+<li><code>english.all.3class.distsim.prop</code></li>
+<li><code>english.muc.7class.distsim.prop</code></li>
+</ul>
+<p>Let’s start off with the 4 classes. We alter <code>server.properties</code> by replacing the old value of <code>ner.model</code> with <code>edu/stanford/nlp/models/ner/english.conll.4class.distsim.crf.ser.gz</code>. We then feed the text file to the application, which returns more ORGANIZATION labels, although one can conclude that more often than not a ORGANIZATION label is not properly used in this context. In addition, the MISC label is introduced, being a label often present at indications of nationality.</p>
+<p>Let’s use the 7 classes model. The <code>ner.model</code> in <code>server.properties</code> will be changed to <code>edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz</code>. We can see that next to our familiar named entities, we also see a new named entity DATE. The ORGANIZATION entity is also more present than the original model.</p>
+<p>### Part 3</p>
+<p>For this part of the exercise, we use the <code>edu/stanford/nlp/models/ner/english.conll.4class.distsim.crf.ser.gz</code> model.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>C:<span class="op">\</span>Users<span class="op">\</span>leonw<span class="op">\</span>Documents<span class="op">\</span>PTA<span class="op">\</span>venv<span class="op">\</span>Scripts<span class="op">\</span>python.exe C:<span class="op">/</span>Users<span class="op">/</span>leonw<span class="op">/</span>Documents<span class="op">/</span>PTA<span class="op">/</span>week3<span class="op">/</span>exercise2.py</span>
+<span id="cb2-2"><a href="#cb2-2"></a>countess O</span>
+<span id="cb2-3"><a href="#cb2-3"></a>independence O</span>
+<span id="cb2-4"><a href="#cb2-4"></a>Lord O</span>
+<span id="cb2-5"><a href="#cb2-5"></a>Countess ORGANIZATION</span>
+<span id="cb2-6"><a href="#cb2-6"></a>Ada ORGANIZATION</span>
+<span id="cb2-7"><a href="#cb2-7"></a>Byron ORGANIZATION</span>
+<span id="cb2-8"><a href="#cb2-8"></a>question O</span>
+<span id="cb2-9"><a href="#cb2-9"></a>attempt O</span>
+<span id="cb2-10"><a href="#cb2-10"></a>disease O</span>
+<span id="cb2-11"><a href="#cb2-11"></a>England LOCATION</span>
+<span id="cb2-12"><a href="#cb2-12"></a>augusta O</span>
+<span id="cb2-13"><a href="#cb2-13"></a>Ada PERSON</span>
+<span id="cb2-14"><a href="#cb2-14"></a>Byron PERSON</span>
+<span id="cb2-15"><a href="#cb2-15"></a>bent O</span>
+<span id="cb2-16"><a href="#cb2-16"></a>byron O</span>
+<span id="cb2-17"><a href="#cb2-17"></a>club O</span>
+<span id="cb2-18"><a href="#cb2-18"></a>instrument O</span>
+<span id="cb2-19"><a href="#cb2-19"></a>Lord LOCATION</span>
+<span id="cb2-20"><a href="#cb2-20"></a>others O</span>
+<span id="cb2-21"><a href="#cb2-21"></a>December O</span>
+<span id="cb2-22"><a href="#cb2-22"></a>earth O</span>
+<span id="cb2-23"><a href="#cb2-23"></a>baron O</span>
+<span id="cb2-24"><a href="#cb2-24"></a>king O</span>
+<span id="cb2-25"><a href="#cb2-25"></a>working O</span>
+<span id="cb2-26"><a href="#cb2-26"></a>Isabella PERSON</span>
+<span id="cb2-27"><a href="#cb2-27"></a>programmer O</span>
+<span id="cb2-28"><a href="#cb2-28"></a>lord O</span>
+<span id="cb2-29"><a href="#cb2-29"></a>godhead O</span>
+<span id="cb2-30"><a href="#cb2-30"></a>Engine ORGANIZATION</span>
+<span id="cb2-31"><a href="#cb2-31"></a>engineer O</span>
+<span id="cb2-32"><a href="#cb2-32"></a>algorithm O</span>
+<span id="cb2-33"><a href="#cb2-33"></a>history O</span>
+<span id="cb2-34"><a href="#cb2-34"></a>mother O</span>
+<span id="cb2-35"><a href="#cb2-35"></a>War ORGANIZATION</span>
+<span id="cb2-36"><a href="#cb2-36"></a>friendship O</span>
+<span id="cb2-37"><a href="#cb2-37"></a>overlord O</span>
+<span id="cb2-38"><a href="#cb2-38"></a>Greek ORGANIZATION</span>
+<span id="cb2-39"><a href="#cb2-39"></a>employment O</span>
+<span id="cb2-40"><a href="#cb2-40"></a>relationship O</span>
+<span id="cb2-41"><a href="#cb2-41"></a>end O</span>
+<span id="cb2-42"><a href="#cb2-42"></a>mathematics O</span>
+<span id="cb2-43"><a href="#cb2-43"></a>approach O</span>
+<span id="cb2-44"><a href="#cb2-44"></a>Luigi PERSON</span>
+<span id="cb2-45"><a href="#cb2-45"></a>concern O</span>
+<span id="cb2-46"><a href="#cb2-46"></a>charles O</span>
+<span id="cb2-47"><a href="#cb2-47"></a>year O</span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="kw">class</span> O</span>
+<span id="cb2-49"><a href="#cb2-49"></a>November O</span>
+<span id="cb2-50"><a href="#cb2-50"></a>oeuvre O</span>
+<span id="cb2-51"><a href="#cb2-51"></a>greek O</span>
+<span id="cb2-52"><a href="#cb2-52"></a>poet O</span>
+<span id="cb2-53"><a href="#cb2-53"></a>adenosine O</span>
+<span id="cb2-54"><a href="#cb2-54"></a>forefather O</span>
+<span id="cb2-55"><a href="#cb2-55"></a>endowment O</span>
+<span id="cb2-56"><a href="#cb2-56"></a>engine O</span>
+<span id="cb2-57"><a href="#cb2-57"></a>science O</span>
+<span id="cb2-58"><a href="#cb2-58"></a>King ORGANIZATION</span>
+<span id="cb2-59"><a href="#cb2-59"></a>skill O</span>
+<span id="cb2-60"><a href="#cb2-60"></a>work O</span>
+<span id="cb2-61"><a href="#cb2-61"></a>Babbage PERSON</span>
+<span id="cb2-62"><a href="#cb2-62"></a>england O</span>
+<span id="cb2-63"><a href="#cb2-63"></a>world O</span>
+<span id="cb2-64"><a href="#cb2-64"></a>anne O</span>
+<span id="cb2-65"><a href="#cb2-65"></a>pastime O</span>
+<span id="cb2-66"><a href="#cb2-66"></a>talent O</span>
+<span id="cb2-67"><a href="#cb2-67"></a>interest O</span>
+<span id="cb2-68"><a href="#cb2-68"></a>relate O</span>
+<span id="cb2-69"><a href="#cb2-69"></a>Independence ORGANIZATION</span>
+<span id="cb2-70"><a href="#cb2-70"></a>cock O</span>
+<span id="cb2-71"><a href="#cb2-71"></a>article O</span>
+<span id="cb2-72"><a href="#cb2-72"></a>sight O</span>
+<span id="cb2-73"><a href="#cb2-73"></a>access O</span>
+<span id="cb2-74"><a href="#cb2-74"></a>person O</span>
+<span id="cb2-75"><a href="#cb2-75"></a>feat O</span>
+<span id="cb2-76"><a href="#cb2-76"></a>logic O</span>
+<span id="cb2-77"><a href="#cb2-77"></a>study O</span>
+<span id="cb2-78"><a href="#cb2-78"></a>request O</span>
+<span id="cb2-79"><a href="#cb2-79"></a><span class="bu">set</span> O</span>
+<span id="cb2-80"><a href="#cb2-80"></a>note O</span>
+<span id="cb2-81"><a href="#cb2-81"></a>church O</span>
+<span id="cb2-82"><a href="#cb2-82"></a>machine O</span>
+<span id="cb2-83"><a href="#cb2-83"></a>society O</span>
+<span id="cb2-84"><a href="#cb2-84"></a>marriage O</span>
+<span id="cb2-85"><a href="#cb2-85"></a>kinship O</span>
+<span id="cb2-86"><a href="#cb2-86"></a>imagination O</span>
+<span id="cb2-87"><a href="#cb2-87"></a>individual O</span>
+<span id="cb2-88"><a href="#cb2-88"></a>insanity O</span>
+<span id="cb2-89"><a href="#cb2-89"></a>november O</span>
+<span id="cb2-90"><a href="#cb2-90"></a>overture O</span>
+<span id="cb2-91"><a href="#cb2-91"></a>charlemagne O</span>
+<span id="cb2-92"><a href="#cb2-92"></a>father O</span>
+<span id="cb2-93"><a href="#cb2-93"></a>Anne PERSON</span>
+<span id="cb2-94"><a href="#cb2-94"></a>Between ORGANIZATION</span>
+<span id="cb2-95"><a href="#cb2-95"></a>engineering O</span>
+<span id="cb2-96"><a href="#cb2-96"></a>analyst O</span>
+<span id="cb2-97"><a href="#cb2-97"></a>_ O</span>
+<span id="cb2-98"><a href="#cb2-98"></a>wedlock O</span>
+<span id="cb2-99"><a href="#cb2-99"></a>computer O</span>
+<span id="cb2-100"><a href="#cb2-100"></a>child O</span>
+<span id="cb2-101"><a href="#cb2-101"></a>Lovelace ORGANIZATION</span>
+<span id="cb2-102"><a href="#cb2-102"></a>Biography O</span>
+<span id="cb2-103"><a href="#cb2-103"></a>month O</span>
+<span id="cb2-104"><a href="#cb2-104"></a>war O</span>
+<span id="cb2-105"><a href="#cb2-105"></a>doubt O</span>
+<span id="cb2-106"><a href="#cb2-106"></a>vision O</span>
+<span id="cb2-107"><a href="#cb2-107"></a>deaminase O</span>
+<span id="cb2-108"><a href="#cb2-108"></a>wife O</span>
+<span id="cb2-109"><a href="#cb2-109"></a>stage O</span>
+<span id="cb2-110"><a href="#cb2-110"></a>creature O</span>
+<span id="cb2-111"><a href="#cb2-111"></a>Lovelace PERSON</span>
+<span id="cb2-112"><a href="#cb2-112"></a>programâ O</span>
+<span id="cb2-113"><a href="#cb2-113"></a>lovelace O</span>
+<span id="cb2-114"><a href="#cb2-114"></a>company O</span>
+<span id="cb2-115"><a href="#cb2-115"></a>eminence O</span>
+<span id="cb2-116"><a href="#cb2-116"></a>locomotive O</span>
+<span id="cb2-117"><a href="#cb2-117"></a>car O</span>
+<span id="cb2-118"><a href="#cb2-118"></a>december O</span>
+<span id="cb2-119"><a href="#cb2-119"></a>technology O</span>
+<span id="cb2-120"><a href="#cb2-120"></a>calculator O</span>
+<span id="cb2-121"><a href="#cb2-121"></a>mathematician O</span>
+<span id="cb2-122"><a href="#cb2-122"></a>workplace O</span>
+<span id="cb2-123"><a href="#cb2-123"></a>Analyst O</span>
+<span id="cb2-124"><a href="#cb2-124"></a>motion O</span>
+<span id="cb2-125"><a href="#cb2-125"></a>writer O</span>
+<span id="cb2-126"><a href="#cb2-126"></a>sake O</span>
+<span id="cb2-127"><a href="#cb2-127"></a>mentality O</span>
+<span id="cb2-128"><a href="#cb2-128"></a>mind<span class="op">-</span><span class="bu">set</span> O</span>
+<span id="cb2-129"><a href="#cb2-129"></a>calendar O</span>
+<span id="cb2-130"><a href="#cb2-130"></a>bill O</span>
+<span id="cb2-131"><a href="#cb2-131"></a>chiefly O</span>
+<span id="cb2-132"><a href="#cb2-132"></a>tool O</span>
+<span id="cb2-133"><a href="#cb2-133"></a>Metaphysician MISC</span>
+<span id="cb2-134"><a href="#cb2-134"></a>death O</span>
+<span id="cb2-135"><a href="#cb2-135"></a>Charles PERSON</span>
+<span id="cb2-136"><a href="#cb2-136"></a>capability O</span>
+<span id="cb2-137"><a href="#cb2-137"></a>Menabrea PERSON</span>
+<span id="cb2-138"><a href="#cb2-138"></a>universe O</span>
+<span id="cb2-139"><a href="#cb2-139"></a>path O</span>
+<span id="cb2-140"><a href="#cb2-140"></a>isabella O</span>
+<span id="cb2-141"><a href="#cb2-141"></a>don O</span>
+<span id="cb2-142"><a href="#cb2-142"></a>Ada LOCATION</span>
+<span id="cb2-143"><a href="#cb2-143"></a>Byron LOCATION</span>
+<span id="cb2-144"><a href="#cb2-144"></a>Analytical ORGANIZATION</span>
+<span id="cb2-145"><a href="#cb2-145"></a>adult O</span>
+<span id="cb2-146"><a href="#cb2-146"></a>founder O</span>
+<span id="cb2-147"><a href="#cb2-147"></a>Notes O</span>
+<span id="cb2-148"><a href="#cb2-148"></a>€ O</span>
+<span id="cb2-149"><a href="#cb2-149"></a>populace O</span>
+<span id="cb2-150"><a href="#cb2-150"></a><span class="co">&#39;&#39;</span> O</span>
+<span id="cb2-151"><a href="#cb2-151"></a>hardening O</span>
+<span id="cb2-152"><a href="#cb2-152"></a><span class="op">==</span> O</span>
+<span id="cb2-153"><a href="#cb2-153"></a>campaign O</span>
+<span id="cb2-154"><a href="#cb2-154"></a>worldly O</span>
+<span id="cb2-155"><a href="#cb2-155"></a>effort O</span>
+<span id="cb2-156"><a href="#cb2-156"></a>Augusta ORGANIZATION</span>
+<span id="cb2-157"><a href="#cb2-157"></a></span>
+<span id="cb2-158"><a href="#cb2-158"></a>Process finished <span class="cf">with</span> exit code <span class="dv">0</span></span></code></pre></div>
+</body>
+</html>
