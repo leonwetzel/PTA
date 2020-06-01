@@ -8,12 +8,15 @@ __email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buijse@student.rug.nl",
              "r.p.terpstra@student.rug.nl"]
 __status__ = "Development"
 
+from collections import Counter
 
 import wikipedia
 import os
+
 from nltk.corpus import wordnet
 from nltk import word_tokenize, pos_tag, sent_tokenize
 from nltk.wsd import lesk
+
 
 def main():
     page_id_list = []
@@ -32,7 +35,9 @@ def main():
                     if len(i.split()) == 7:
                         if i.split()[6].split('/')[-1] not in page_id_list:
                             page_id_list.append(i.split()[6].split('/')[-1])
+
     for page_id in page_id_list:
+        print(f"Page {page_id}")
         try:
             page = wikipedia.page(page_id)
         except wikipedia.exceptions.DisambiguationError:
@@ -47,10 +52,9 @@ def main():
                 if item[1][0] == 'N':
                     token = item[0]
                     if len(wordnet.synsets(token, 'n')) > 1:
-                        print(token, lesk(sentence, token, 'n'))
+                        print(token, lesk(sentence, token, 'n'), len(wordnet.synsets(token, 'n')))
 
-
-		
+    print(f"{len(page_id_list)} pages have been used.")
 
 
 if __name__ == '__main__':
