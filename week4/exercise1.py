@@ -39,12 +39,18 @@ def main():
                     token_rows = F.readlines()
 
                 # iterate over the lines and place values in their designated variables
-                for row in token_rows:
-                    char_offset_start, char_offset_end, id, token = row.strip().split()
-                    offsets_start.append(char_offset_start)
-                    offsets_end.append(char_offset_end)
-                    ids.append(id)
-                    tokens.append(token)
+                column_count = len(row.strip().split())
+                if column_count == 7:
+                    char_offset_start, char_offset_end, id, token, pos_tag, ner, wikipedia_link = row.strip().split()
+                    ners.append(ner)
+                    urls.append(wikipedia_link)
+                elif column_count == 5:
+                    char_offset_start, char_offset_end, id, token, pos_tag = row.strip().split()
+                    ners.append("UNK")
+                    urls.append("404")
+                else:
+                    # row does not comply with standards
+                    continue
 
                 # get the post tags
                 pos_tags = nltk.pos_tag(tokens)
