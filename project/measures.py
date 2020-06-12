@@ -13,7 +13,6 @@ from collections import Counter
 from nltk.metrics import ConfusionMatrix
 
 
-
 def scores(labels, cm):
 
     true_positives = Counter()
@@ -82,8 +81,6 @@ def annotations(directory):
                         else:
                             generated_items.append(' ')
 
-    print(annotated_items)
-    print(generated_items)
     return annotated_items, generated_items, wiki_annotated, wiki_generated
 
 
@@ -96,8 +93,6 @@ def main():
 
     labels_class = set('COU CIT NAT PER ORG ENT'.split())
     scores(labels_class, cm)
-
-
 
 
 if __name__ == '__main__':
