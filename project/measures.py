@@ -11,7 +11,7 @@ __status__ = "Development"
 import os
 from collections import Counter
 from nltk.metrics import ConfusionMatrix
-import wikipedia
+
 
 
 def scores(labels, cm):
@@ -45,15 +45,6 @@ def scores(labels, cm):
         print('recall:', recall)
         print('precision:', precision)
         print()
-
-def test(directory):
-    direc = ""
-    for root, dirs, files in os.walk(directory):
-        for name in files:
-            if name.endswith(".ent"):
-                direc = os.path.join(root, name)
-            if name.endswith(".out"):
-                direc = os.path.join(root, name)
 
 
 def annotations(directory):
@@ -93,16 +84,20 @@ def annotations(directory):
 
     print(annotated_items)
     print(generated_items)
-    return annotated_items, generated_items
+    return annotated_items, generated_items, wiki_annotated, wiki_generated
 
 
 def main():
-    items1, items2 = annotations('dev')
+    items1, items2, wiki1, wiki2 = annotations('dev')
     cm = ConfusionMatrix(items1, items2)
+    #cm_wiki = ConfusionMatrix(wiki1, wiki2)
     print(cm)
+    #print(cm_wiki)
 
     labels_class = set('COU CIT NAT PER ORG ENT'.split())
     scores(labels_class, cm)
+
+
 
 
 if __name__ == '__main__':
