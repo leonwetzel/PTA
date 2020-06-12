@@ -11,6 +11,7 @@ __status__ = "Development"
 import os
 from collections import Counter
 from nltk.metrics import ConfusionMatrix
+import wikipedia
 
 
 def scores(labels, cm):
@@ -45,10 +46,19 @@ def scores(labels, cm):
         print('precision:', precision)
         print()
 
+def test(directory):
+    direc = ""
+    for root, dirs, files in os.walk(directory):
+        for name in files:
+            if name.endswith(".ent"):
+                direc = os.path.join(root, name)
+            if name.endswith(".out"):
+                direc = os.path.join(root, name)
+
 
 def annotations(directory):
-    classeslst = []
-    wikilst = []
+    wiki_annotated, wiki_generated = [], []
+    annotated_items, generated_items = [], []
     for root, dirs, files in os.walk(directory):
         for name in files:
             if name.endswith(".ent"):
@@ -58,21 +68,36 @@ def annotations(directory):
                     lines = file.readlines()
                     for line in lines:
                         if len(line.split()) >= 6:
-                            classeslst.append(line.split()[5])
-                            #if len(line.split()) == 7:
-                                #wikilst.append(line.split()[6])
-                            #else:
-                                #continue
+                            annotated_items.append(line.split()[5])
+                            if len(line.split()) == 7:
+                                wiki_annotated.append(line.split()[6])
+                            else:
+                                wiki_annotated.append(' ')
                         else:
-                            continue
+                            annotated_items.append(' ')
 
-    return classeslst
+            if name.endswith(".out"):
+                input_file_path = os.path.join(root, name)
+
+                with open(input_file_path, 'r') as file:
+                    lines = file.readlines()
+                    for line in lines:
+                        if len(line.split()) >= 6:
+                            generated_items.append(line.split()[5])
+                            if len(line.split()) == 7:
+                                wiki_generated.append(line.split()[6])
+                            else:
+                                wiki_generated.append(' ')
+                        else:
+                            generated_items.append(' ')
+
+    print(annotated_items)
+    print(generated_items)
+    return annotated_items, generated_items
 
 
 def main():
-    items1 = annotations("dev")
-    items2 = annotations("test")
-
+    items1, items2 = annotations('dev')
     cm = ConfusionMatrix(items1, items2)
     print(cm)
 
