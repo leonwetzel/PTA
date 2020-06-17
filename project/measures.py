@@ -59,10 +59,10 @@ def annotations(directory):
                     for line in lines:
                         if len(line.split()) >= 6:
                             annotated_items.append(line.split()[5])
-                            #if len(line.split()) == 7:
-                                #wiki_annotated.append('TRUE')
-                            #else:
-                                #wiki_annotated.append('FALSE')
+                            if len(line.split()) == 7:
+                                wiki_annotated.append(line.split()[6])
+                            else:
+                                wiki_annotated.append(' ')
                         else:
                             annotated_items.append(' ')
 
@@ -74,28 +74,31 @@ def annotations(directory):
                     for line in lines:
                         if len(line.split()) >= 6:
                             generated_items.append(line.split()[5])
-                            #if len(line.split()) == 7:
-                                #wiki_generated.append('TRUE')
-                            #else:
-                                #wiki_generated.append('FALSE')
+                            if len(line.split()) == 7:
+                                wiki_generated.append(line.split()[6])
+                            else:
+                                wiki_generated.append(' ')
                         else:
                             generated_items.append(' ')
 
     return annotated_items, generated_items, wiki_annotated, wiki_generated
 
 
+def compare_wiki(wiki1, wiki2):
+    return [i for i, j in zip(wiki1, wiki2) if i == j]
+
+
 def main():
-    items1, items2, wiki1, wiki2 = annotations('dev')
+    items1, items2, wiki1, wiki2 = annotations('test')
     cm = ConfusionMatrix(items1, items2)
-    #cm_wiki = ConfusionMatrix(wiki1, wiki2)
+
     print(cm)
-    #print(cm_wiki)
 
     labels_class = set('COU CIT NAT PER ORG ENT'.split())
     scores(labels_class, cm)
 
-    #labels_wiki = set('TRUE FALSE')
-    #scores(labels_wiki, cm_wiki)
+    print(len(wiki1))
+    print(len(compare_wiki(wiki1, wiki2)))
 
 
 if __name__ == '__main__':

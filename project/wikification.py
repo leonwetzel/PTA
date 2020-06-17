@@ -12,26 +12,10 @@ import os
 import re
 
 import spacy
+import wikipedia
 
+wikipedia.set_lang("en")
 nlp = spacy.load("entity_tagger")
-
-
-def find_files(folder, ends_with):
-    page_id_list = []
-    for subdir, dirs, files in os.walk(folder):
-        for file in files:
-            if file.endswith(ends_with):
-                page_id_list.append(os.path.join(subdir, file))
-    return page_id_list
-
-
-# def create_tokens(file):
-#     with open(file) as csv_file:
-#         words_list = []
-#         reader = csv.reader(csv_file, delimiter=' ')
-#         for row in reader:
-#             words_list.append(row[3])
-#     return words_list
 
 
 def tag_ner(char_offset_starts, char_offset_ends, ids, tokens, pos_tags):
@@ -68,9 +52,20 @@ def tag_ner(char_offset_starts, char_offset_ends, ids, tokens, pos_tags):
 
     for index, token in enumerate(tokens):
         if token in ners:
+            page = None
+            try:
+                page = wikipedia.page(token).url
+            except wikipedia.exceptions.DisambiguationError:
+                pass
+            except wikipedia.exceptions.PageError:
+                pass
             entity = next(ent for ent in entities if ent['text'] == token)
-            ner_tagged.append(f"{entity['start']} {entity['end']}"
-                              f" {ids[index]} {token} {pos_tags[index]} {entity['label']}")
+            if page:
+                ner_tagged.append(f"{entity['start']} {entity['end']}"
+                                  f" {ids[index]} {token} {pos_tags[index]} {entity['label']} {page}")
+            else:
+                ner_tagged.append(f"{entity['start']} {entity['end']}"
+                                  f" {ids[index]} {token} {pos_tags[index]} {entity['label']}")
         else:
             ner_tagged.append(f"{char_offset_starts[index]} {char_offset_ends[index]}"
                               f" {ids[index]} {token} {pos_tags[index]}")
@@ -123,7 +118,7 @@ def main():
 
                 output = tag_ner(offsets_start, offsets_end, ids, tokens, pos_tags)
 
-                output_file_name = os.path.join(subdir, 'en.tok.off.pos.ent.out')
+                output_file_name = os.path.join(subdir, 'en.tok.off.pos.ent')
                 with open(output_file_name, 'w') as F:
                      for row in output:
                         F.write(f"{row}\n")
