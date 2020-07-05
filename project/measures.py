@@ -35,6 +35,8 @@ def scores(labels, cm):
     for i in sorted(labels):
         if true_positives[i] == 0:
             fscore = 0
+            recall = 0
+            precision = 0
         else:
             precision = true_positives[i] / float(true_positives[i] + false_positives[i])
             recall = true_positives[i] / float(true_positives[i] + false_negatives[i])
@@ -90,11 +92,14 @@ def compare_wiki(wiki1, wiki2):
 
 def main():
     items1, items2, wiki1, wiki2 = annotations('test')
+
+    print([len(x) for x in annotations('test')])
+
     cm = ConfusionMatrix(items1, items2)
 
     print(cm)
 
-    labels_class = set('COU CIT NAT PER ORG ENT'.split())
+    labels_class = ["COU", "CIT", "NAT", "PER", "ORG", "ANI", "SPO", "ENT"]
     scores(labels_class, cm)
 
     print(len(wiki1))

@@ -20,8 +20,9 @@ from pathlib import Path
 import spacy
 from spacy.util import minibatch, compounding
 
-import pdb
-
+# since the dataset is not really normally distributed, we have
+# to feed the labels directlt to spaCy instead of the model
+# automatically detecting the labels from the corpus.
 LABELS = {"COU", "CIT", "NAT", "PER", "ORG", "ANI", "SPO", "ENT"}
 
 
@@ -109,6 +110,11 @@ def main(model=None, output_dir=r"C:\Users\leonw\Documents\PTA\project\beun", n_
 
 
 def convert_train_data():
+    """
+    Converts training data from the PMB files
+    into a friendly-format for the spaCy models.
+    :return:
+    """
     train_data = []
     for subdir, dirs, files in os.walk(r'C:\Users\leonw\Documents\PTA\project\dev'):
         for file in files:
