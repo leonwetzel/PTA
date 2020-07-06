@@ -61,12 +61,12 @@ def annotations(directory):
                     for line in lines:
                         if len(line.split()) >= 6:
                             annotated_items.append(line.split()[5])
-                            if len(line.split()) == 7:
-                                wiki_annotated.append(line.split()[6])
-                            else:
-                                wiki_annotated.append(' ')
                         else:
                             annotated_items.append(' ')
+                        if len(line.split()) == 7:
+                            wiki_annotated.append(line.split()[6])
+                        else:
+                            wiki_annotated.append(' ')
 
             if name.endswith(".out"):
                 input_file_path = os.path.join(root, name)
@@ -76,34 +76,36 @@ def annotations(directory):
                     for line in lines:
                         if len(line.split()) >= 6:
                             generated_items.append(line.split()[5])
-                            if len(line.split()) == 7:
-                                wiki_generated.append(line.split()[6])
-                            else:
-                                wiki_generated.append(' ')
                         else:
                             generated_items.append(' ')
+                        if len(line.split()) == 7:
+                            wiki_generated.append(line.split()[6])
+                        else:
+                            wiki_generated.append(' ')
 
     return annotated_items, generated_items, wiki_annotated, wiki_generated
 
 
 def compare_wiki(wiki1, wiki2):
-    return [i for i, j in zip(wiki1, wiki2) if i == j]
+    return [i for i, j in zip(wiki1, wiki2) if i == j and i != ' ']
 
 
 def main():
     items1, items2, wiki1, wiki2 = annotations('test')
-
-    print([len(x) for x in annotations('test')])
-
+    #print([len(x) for x in annotations('test')])
     cm = ConfusionMatrix(items1, items2)
-
     print(cm)
 
     labels_class = ["COU", "CIT", "NAT", "PER", "ORG", "ANI", "SPO", "ENT"]
     scores(labels_class, cm)
 
-    print(len(wiki1))
-    print(len(compare_wiki(wiki1, wiki2)))
+    # This checks the numbers of links generated, and the ones annotated and divides them to give us the number of links
+    # we found versus the number of links we were supposed to find
+    wiki_links_annotated = [elem for elem in wiki1 if elem.strip()]
+    wiki_links_generated = [elem for elem in wiki2 if elem.strip()]
+    print(len(wiki_links_generated) / len(wiki_links_annotated))
+    # This checks of how many links we found, were exactly the same as the ones found by the golden standard
+    print(len(compare_wiki(wiki1, wiki2)) / len(wiki_links_annotated))
 
 
 if __name__ == '__main__':
