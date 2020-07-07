@@ -3,7 +3,7 @@ __author__ = "Leon Wetzel, Teun Buijse and Roman Terpstra"
 __copyright__ = "Copyright 2020 - Leon Wetzel, Teun Buijse and Roman Terpstra"
 __credits__ = ["Leon Wetzel", "Teun Buijse", "Roman Terpstra"]
 __license__ = "GPL"
-__version__ = "0.1"
+__version__ = "1.0"
 __email__ = ["l.f.a.wetzel@student.rug.nl", "t.c.buijse@student.rug.nl",
              "r.p.terpstra@student.rug.nl"]
 __status__ = "Development"
@@ -14,7 +14,13 @@ from nltk.metrics import ConfusionMatrix
 
 
 def scores(labels, cm):
-
+    """
+    Given a set of labels, this script calculates
+    precision, recall and f-score
+    :param labels:
+    :param cm:
+    :return:
+    """
     true_positives = Counter()
     false_negatives = Counter()
     false_positives = Counter()
@@ -49,20 +55,28 @@ def scores(labels, cm):
 
 
 def annotations(directory):
+    """
+    This script walks through the different directories and creates a list of
+    the gold standard items and the generated items, as well as a list of
+    wikipedia links, if applicable, for both. This results in four different lists.
+    :param directory:
+    :return:
+    """
     wiki_annotated, wiki_generated = [], []
     annotated_items, generated_items = [], []
     for root, dirs, files in os.walk(directory):
         for name in files:
             if name.endswith(".ent"):
                 input_file_path = os.path.join(root, name)
-
                 with open(input_file_path, 'r') as file:
                     lines = file.readlines()
                     for line in lines:
+                        # This takes the tag if it has a tag, otherwise adds a space to the list
                         if len(line.split()) >= 6:
                             annotated_items.append(line.split()[5])
                         else:
                             annotated_items.append(' ')
+                        # This takes the wikipedia link if it has it, otherwise adds a space to the list
                         if len(line.split()) == 7:
                             wiki_annotated.append(line.split()[6])
                         else:
@@ -70,14 +84,15 @@ def annotations(directory):
 
             if name.endswith(".out"):
                 input_file_path = os.path.join(root, name)
-
                 with open(input_file_path, 'r') as file:
                     lines = file.readlines()
                     for line in lines:
+                        # This takes the tag if it has a tag, otherwise adds a space to the list
                         if len(line.split()) >= 6:
                             generated_items.append(line.split()[5])
                         else:
                             generated_items.append(' ')
+                        # This takes the wikipedia link if it has it, otherwise adds a space to the list
                         if len(line.split()) == 7:
                             wiki_generated.append(line.split()[6])
                         else:
@@ -87,10 +102,24 @@ def annotations(directory):
 
 
 def compare_wiki(wiki1, wiki2):
+    """
+    This script compares two different lists to each other,
+    and returns the number of matches,
+    as long as the list item isn't a space.
+    :param wiki1:
+    :param wiki2:
+    :return:
+    """
     return [i for i, j in zip(wiki1, wiki2) if i == j and i != ' ']
 
 
 def main():
+    """
+    This script generates the required output.
+    First it draws a confusion matrix, gives you the scores of our system,
+    and lastly shows how accurate the wikification program is.
+    :return:
+    """
     items1, items2, wiki1, wiki2 = annotations('test')
     #print([len(x) for x in annotations('test')])
     cm = ConfusionMatrix(items1, items2)
